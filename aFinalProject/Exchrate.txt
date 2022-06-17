@@ -1,0 +1,17 @@
+America,$,left,comma,1
+Argentina,$,left,decimal,8.405692
+Australia,$,left,comma,1.070835
+Brazil,R$,left,decimal,2.237937
+Canada,$,left,comma,1.086126
+Chile,$,left,comma,591.4077
+Hong Kong,HK$,left,comma,7.750659
+Hungary,Ft,right,decimal,239.2141
+Mexico,$,left,comma,13.08679
+New Zealand,$,left,comma,1.1929
+Norway,kr,left,comma,6.187769
+Russia,p,right,decimal,37.17437
+Saudi Arabia,SAR,right,comma,3.750675
+Singapore,$,left,decimal,1.248927
+South Africa,R,left,comma,10.66882
+Sweden,kr,right,decimal,6.982663
+Switzerland,fr,left,decimal,0.917854
