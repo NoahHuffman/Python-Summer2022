@@ -1,10 +1,11 @@
 from tkinter import *
+from tkinter.font import BOLD
 from CurrencyClass import Currency
 from PIL import Image, ImageTk
 def main():
 
     window = Tk()
-    window.geometry("500x500")
+    window.geometry("500x525")
     window.title("Currency Converter")
     # bgphoto = ImageTk.PhotoImage(file = 'bgimage1.png')
     # label1 = Label( window, image = bgphoto)
@@ -28,16 +29,18 @@ def main():
         countries.append(c)
 
     #Creating Widgets
-    title = Label(window,text="Currency Converter",font=('Calibri 19'),bg="black")
-    amtTxt = Label(window,text="  Amount  ",font=('Calibri 16'),fg="blue")
+    title = Label(window,text="Currency Converter",font=('Calibri 19'),bg="steelblue")
+    title1 = Label(window,text="Currency Converter",font=('Calibri 19'),bg="steelblue",height=10)
+    amtTxt = Label(window,text="  Amount  ",font=('Calibri 16'))
     amt = Entry(window,text="Enter Amount")
     result = Label(window,text=" result ",font=('Calibri 16'),fg="black")
-    f = Label(window,text="  From  ",font=('Calibri 16'),fg="blue")
-    t = Label(window,text="  To  ",font=('Calibri 16'),fg="blue")
-    btn = Button(window, text="CONVERT",bg="grey",fg="black",width=14,height=3)
+    f = Label(window,text="  From  ",font=('Calibri 16'))
+    t = Label(window,text="  To  ",font=('Calibri 16'))
+    btn = Button(window, text="CONVERT",bg="grey",width=14,height=3)
     
     #Displaying Widgets
     title.grid(row=0,column=0,columnspan=3,sticky=EW)
+    title1.grid(row=7,column=0,columnspan=3,sticky=EW)
     result.grid(row=6,column=1,pady=20,columnspan=2,sticky=W)
     amt.grid(row=1,column=1)
     btn.grid(row=6,column=0)
