@@ -9,19 +9,36 @@ from CurrencyClass import Currency
 from tkinter import ttk
 
 
+infile = open("Exchrate.txt")
+countryDict = {}
+countries = []
+for line in infile:
+    info = line.rstrip().split(',')
+    currency = Currency(info[1],info[2]=="left",info[3]=="comma",float(info[4]))
+    countryDict[info[0]] = currency
 
+infile.close()
+for c in countryDict.keys():
+    countries.append(c)
 expression = ''
+
 #Button Functions
+
+
+
+
 
 def record():
     content=entName.get()
     content=float(content)
-    content="{0:s}{1:,.2f}".format('$',content)
-    result["text"]=content
-    
+    if info[3]=="decimal":
+        content="{0:s}{1:,.2f}".format('$',content)
+        result["text"]=content
+    elif info[3]=="comma":
+        content="{0:s}{1:,.2f}".format('$',content).replace(",","w").replace(".",",").replace("w",".")
+        result["text"]=content
 
-def pressNum(num):
-    
+def pressNum(num):    
     global expression
     expression = expression+str(num)
     equation.set(expression)
@@ -56,16 +73,7 @@ def changeCountryTo(event):
 
 
 
-infile = open("Exchrate.txt")
-countryDict = {}
-countries = []
-for line in infile:
-    info = line.rstrip().split(',')
-    currency = Currency(info[1],info[2]=="left",info[3]=="comma",float(info[4]))
-    countryDict[info[0]] = currency
-infile.close()
-for c in countryDict.keys():
-    countries.append(c)
+
 
 
 
@@ -118,7 +126,7 @@ equation = StringVar()
 
 #Entrybox for Buttons
 conOfentNum = StringVar(window, value = equation)
-entName = Entry(window,  textvariable=equation)
+entName = Entry(window, text='$', textvariable=equation)
 entName.grid(row=2,column=2,sticky=W)
 entName.focus_set()
 
