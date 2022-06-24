@@ -175,11 +175,11 @@ countryTo.bind('<<ListboxSelect>>', changeCountryTo)
 
 #Scrolls
 scrollLS = Scrollbar(window,orient=VERTICAL)
-scrollLS.grid(row=3,column=0,sticky=NSEW)
+scrollLS.grid(row=3,column=0,sticky=NS)
 scrollLS["command"] = countryFrom.yview
 
 scrollRS = Scrollbar(window,orient=VERTICAL)
-scrollRS.grid(row=3,column=3,sticky=NSEW)
+scrollRS.grid(row=3,column=3,sticky=NS)
 scrollRS['command']= countryTo.yview
 
 
