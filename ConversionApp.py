@@ -1,53 +1,76 @@
-from ast import Expression
-from ctypes import resize
-from logging import root
 from tkinter import *
-from tkinter import font
-from turtle import left, width
 from PIL import Image,ImageTk
 from CurrencyClass import Currency
-from tkinter import ttk
-
 
 infile = open("Exchrate.txt")
 countryDict = {}
 countries = []
-for line in infile:
+list=[]
+for line in infile:    
     info = line.rstrip().split(',')
     currency = Currency(info[1],info[2]=="left",info[3]=="comma",float(info[4]))
     countryDict[info[0]] = currency
-
+    #print(currency)
 infile.close()
 for c in countryDict.keys():
     countries.append(c)
 expression = ''
 
-#Button Functions
 
 
 
 
 
+
+#Function of the Record button
+#This includes formatting
 def record():
-    content=entName.get()
-    content=float(content)
-    if info[3]=="decimal":
-        content="{0:s}{1:,.2f}".format('$',content)
-        result["text"]=content
-    elif info[3]=="comma":
-        content="{0:s}{1:,.2f}".format('$',content).replace(",","w").replace(".",",").replace("w",".")
-        result["text"]=content
+        content=entName.get()
+        content=float(content) 
+        if info[2]=="left":
+            if info[3]=="decimal":
+                content="{0:s}{1:,.2f}".format(info[1],content)
+                result["text"]=content
+            elif info[3]=="comma":
+                content="{0:s}{1:,.2f}".format(info[1],content).replace(",","w").replace(".",",").replace("w",".")
+                result["text"]=content
+            else: 
+                print("ERROR")
+        elif info[2]=="right":
+            if info[3]=="decimal":
+                content="{0:,.2f}{1:s}".format(content,info[1])
+                result["text"]=content
+            elif info[3]=="comma":
+                content="{0:,.2f}{1:s}".format(content,info[1]).replace(",","w").replace(".",",").replace("w",".")
+                result["text"]=content
+            else: 
+                print("ERROR")
+        else:
+            print("ERROR")
+
+def help():
+    frame = Tk()
+    frame.title("Help Window")
+    frame.geometry('325x200')
+    mssgOne = Label(frame,text="1. Select a country to convert from.",font="Calibri, 14")
+    mssgOne.grid(row=0,column=0,pady=7,sticky=W)
+    mssgTwo = Label(frame,text='2. Select a country to convert to',font="Calibri, 14")
+    mssgTwo.grid(row=1,column=0,pady=7,sticky=W)
+    mssg3 = Label(frame,text="3. Enter an amount",font="Calibri, 14")
+    mssg3.grid(row=2,column=0,pady=7,sticky=W)
+    mssg4 = Label(frame,text="4. Press 'Record'",font="Calibri, 14")
+    mssg4.grid(row=3,column=0,pady=7,sticky=W)
+    frame.mainloop()
 
 def pressNum(num):    
     global expression
     expression = expression+str(num)
     equation.set(expression)
+
 def clear():
     global expression
     expression = ''
     equation.set(expression)
-    
-
 
 def changeCountryFrom(event):
         ################FLAG
@@ -59,6 +82,9 @@ def changeCountryFrom(event):
         imgLblfrom = Label(window,image=render1)
         imgLblfrom.grid(row=3,column=2,padx=10,sticky=W)
         window.mainloop()
+
+        
+
         ################FLAG
 def changeCountryTo(event):
         ################FLAG
@@ -70,6 +96,23 @@ def changeCountryTo(event):
         imgLblto.grid(row=3,column=5,padx=5,sticky=W)
         window.mainloop()
         ################FLAG
+
+
+
+
+    # if info[2]=="left" and info[3]=="decimal":
+    #     content="{0:s}{1:,.2f}".format('$',content)
+    #     result["text"]=content
+    # elif info[3]=="comma":
+    #     content="{0:s}{1:,.2f}".format('$',content).replace(",","w").replace(".",",").replace("w",".")
+    #     result["text"]=content
+    
+
+
+
+
+
+
 
 
 
@@ -93,7 +136,7 @@ titleTop = Label(window,bg="salmon")
 titleBot = Label(window,bg="salmon")
 converMssg1 = Label(window,text="    Convert from     ")
 converMss2 = Label(window,text= "       Convert to        ")
-result = Label(window,text="")
+result = Label(window,text="$0.00")
 
 
 titleTop.grid(row=0,column=0,columnspan=7,sticky=EW)
@@ -163,7 +206,7 @@ btn_record = Button(buttonFrame,text="Record",width=16,bg='red',font=('Calibri 1
 btn_record.grid(row=0,column=3,columnspan=3)
 
 #Help button
-btn_help = Button(buttonFrame,text="Help?", width=16,bg = 'silver', font=('Calibri 18'))
+btn_help = Button(buttonFrame,text="Help", width=16,bg = 'silver', font=('Calibri 18'),command=lambda:help())
 btn_help.grid(row=3, column=3, columnspan=3)
 
 #ListBox Left Side
